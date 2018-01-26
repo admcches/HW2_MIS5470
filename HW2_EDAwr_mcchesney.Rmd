@@ -43,6 +43,8 @@ for this homework assignment in your GitHub account. Periodically push your comm
 to GitHub. When done with the assignment, paste in the URL of your GitHub project
 so that I can go look at it.
 
+**Student comment**: Go to https://github.com/admcches/HW2_MIS5470 to access versions
+
 ## Step 3 - Set working directory and explore data folder
 
 Set the working directory or create an R Studio project in the current folder. You'll notice that there is a folder named **data**.
@@ -142,8 +144,10 @@ You should read the **county.csv** file into a data frame named county_df and
 **county_MI.csv** into a data frame named county_MI.
 
 ```{r read_countydata}
-# county_df <- ???
-# county_MI <- ???
+
+ county_df <- read.csv("data/county.csv", header=TRUE)
+
+ county_MI <- read.csv("data/county_MI.csv", header=TRUE)
 ```
 
 Check the structure of each data.frame and use the `summary` function to begin
@@ -151,8 +155,12 @@ exploring the data. Are there any NA values? What
 differences do you notice between the structure of the two data frames.
 
 ```{r}
+summary(county_df)
+summary(county_MI)
 
 ```
+
+Answer: 
 
 The county_MI data frame contains data for Michigan only and includes an
 peninsula field. See **census_data_prep.R** to see how this field was
@@ -289,3 +297,7 @@ Do some additional plotting to look for interesting patterns or relationships
 either in the full US dataset or the MI only dataset. In addition, try out
 some of ggplots additional features such as themes, axis formatting, gridline
 control, or others.
+
+### Github URL
+
+Go to https://github.com/admcches/HW2_MIS5470 to access
