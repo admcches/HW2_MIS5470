@@ -160,8 +160,6 @@ summary(county_MI)
 
 ```
 
-Answer: 
-
 The county_MI data frame contains data for Michigan only and includes an
 peninsula field. See **census_data_prep.R** to see how this field was
 created. It involves scraping a table out of a web page.
@@ -177,7 +175,9 @@ income for the entire US.
 Write a short paragraph describing the distribution of median incomes.
 
 ```{r}
-# ggplot(???) + geom_histogram(???)
+  #ggplot(county_df, aes(X=)
+         
+         
 ```
 
 ### Problem 3 - Histogram of total population
@@ -185,6 +185,12 @@ Write a short paragraph describing the distribution of median incomes.
 Create a histogram of total population for counties in the US.
 
 ```{r histo_totpop}
+#apply Sturge's rule
+  binsize = round(1 +3.22 * log(nrow(county_df)))
+
+#histogram
+  ggplot(county_df, aes(x = county_df$TotalPop)) +
+           geom_histogram()
 
 ```
 
