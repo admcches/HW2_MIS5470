@@ -190,7 +190,7 @@ Create a histogram of total population for counties in the US.
 
 #histogram
   ggplot(county_df, aes(x = county_df$TotalPop)) +
-           geom_histogram()
+           geom_histogram(bins = binsize)
 
 ```
 
@@ -203,6 +203,15 @@ Repeat the histogram about but make the following style changes to the plot.
 
 ```{r histo_stylechanges}
 
+  ggplot(county_df, aes(x = county_df$TotalPop)) +
+           geom_histogram(bins = binsize, fill = "midnightblue") +
+           labs(title= "Distribution of population for US Counties", x="Total Population", y="Number of counties")
+
+  ggplot(county_df, aes(x = county_df$TotalPop)) +
+           geom_histogram(bins = binsize, aes(y=..density..),fill = "midnightblue") +
+           labs(title= "Distribution of population for US Counties", x="Total Population", y="Number of counties") +
+           geom_density()
+
 ```
 
 **Hacker Extra** - Also create a kernel density plot overlaid on a histogram of
@@ -211,6 +220,11 @@ Income.
 Repeat the histogram but only for counties with less than 2.5 million people.
 
 ```{r histo_lt2.5m}
+
+  ggplot(county_df, aes(x = county_df$TotalPop)) +
+           geom_histogram(bins = binsize, fill = "midnightblue") +
+           labs(title= "Distribution of population for US Counties", x="Total Population", y="Number of counties") +
+           xlim(0, 2500000)
 
 ```
 
@@ -225,6 +239,10 @@ differ with respect to distribution of median income over the counties?
 
 
 ```{r bp_inc_by_peninsula}
+
+ggplot(county_MI, aes(x = county_MI$peninsula, y = county_MI$Income)) +
+        geom_boxplot() +
+  labs(title="Comparison of Incomes in Michigan Peninsulas",x="Peninsula",y="Income")
 
 ```
 
