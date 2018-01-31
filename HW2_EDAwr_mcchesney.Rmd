@@ -83,61 +83,6 @@ library(dplyr)
 library(ggplot2)
 ```
 
-## Step 1 - Familiarize yourself with the data and the assignment
-
-In this assignment you'll do some exploratory data analysis
-with R on a dataset US census information based on the [American Community Survey](https://www.census.gov/programs-surveys/acs/). The version of
-this data that we'll be using is from a Kaggle dataset. See
-https://www.kaggle.com/muonneutrino/us-census-demographic-data/data and look
-at the column metadata for the county level table to see what the various
-columns mean.
-
-As we did in class, you'll be creating an R Markdown document to
-both prepare a dataset and do some analysis as well as to document the
-steps you did (and answer some questions I'll throw at you).
-
-You'll notice a few "Hacker Extra" tasks
-thrown in. These are for those of you who want to go a little above and beyond
-and attempt some more challenging tasks. And, feel free to do a some free form
-Hacker Extra style work yourself - in other words, do something beyond what
-was asked. You'll learn more.
-
-## Step 2 - Create a new R Markdown document
-
-Save this file as a new R Markdown document and name it **HW2_EDAwR_[_your last name_].Rmd**. Mine would
-be called **HW2_EDAwR_isken.Rmd**. Save it into the same folder as this file. 
-
-This will be your working directory. 
-
-## Step 3 - Set working directory and explore data folder
-
-Set the working directory or create an R Studio project in the current folder. You'll notice that there is a folder named **data**.
-Inside of it you'll find the data files for this assignment:
-
-- **acs2015_census_tract_data.csv**
-- **acs2015_county_data.csv**
-- **us_census_bureau_regions_and_divisions.csv**
-- **county_MI.csv**
-
-The first two files are from the Kaggle site for this dataset.
-The last file, **county_MI.csv**, is a file that I created and just contains
-data from Michigan. The R script, **census_data_prep.R** was used to create
-the file as well as to merge information from the **us_census_bureau_regions_and_divisions.csv** file with the county data.
-
-You might want to use shell commands or a text editor like Geany to snoop the files a bit.
-
-
-## Step 4 - Complete the following R tasks and answer questions
-
-Now you'll need to complete the following tasks in R. Just like we did in class,
-you should use a combination of markdown text (be concise, no need to write tons
-of text) to explain what you are doing and R code chunks to actually do it. When
-you are done, use the "Knit" button to generate an HTML file from your R
-Markdown. You'll be submitting BOTH the completed R Markdown file as well as the
-generated HTML file. You'll notice that I've left some empty code chunks as well
-as some partially filled in code chunks. Of course, feel free to add more code
-chunks as needed.
-
 ### Problem 1 - Get the data into a dataframe
 
 You should read the **county.csv** file into a data frame named county_df and
@@ -175,10 +120,25 @@ income for the entire US.
 Write a short paragraph describing the distribution of median incomes.
 
 ```{r}
-  #ggplot(county_df, aes(X=)
-         
+#apply Sturge's rule
+  binsize = round(1 +3.22 * log(nrow(county_df)))
+
+  ggplot(county_df, aes(x = county_df$Income)) +
+        geom_histogram(bins = binsize)
+  
+  ggplot(county_df, aes(x = "Total US", y = county_df$Income)) +
+        geom_boxplot()
+  
+  ggplot(county_df, aes(x = county_df$Income)) +
+        geom_density()
+   
+  ggplot(county_df, aes(x = "Total US", y = county_df$Income)) +
+        geom_violin()
+   
          
 ```
+
+Notes on income: Income appears to be positively skewed.  Given that income cannot be negative, a lower boundary of zero can be set, with theoretically no upper boundary of income level.  This leads to several counties that have a median income nearly double that of the national median (in this case national median being the median of the counties' medians).
 
 ### Problem 3 - Histogram of total population
 
