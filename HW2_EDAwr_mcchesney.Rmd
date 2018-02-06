@@ -211,7 +211,29 @@ some of the other variables. Summarize your findings in a few short paragraphs.
 
 ```{r more_boxplots}
 
+ggplot(county_MI, aes(x = county_MI$peninsula, y = county_MI$Professional)) +
+        geom_boxplot() +
+  labs(title="Comparison of Professional Workers in Michigan Peninsulas",x="Peninsula",y="Percent of Professional Workers Population")
+
+ggplot(county_MI, aes(x = county_MI$peninsula, y = county_MI$Poverty)) +
+        geom_boxplot() +
+  labs(title="Comparison of Poverty in Michigan Peninsulas",x="Peninsula",y="Percentage of Poverty")
+
+ggplot(county_MI, aes(x = county_MI$peninsula, y = county_MI$Unemployment)) +
+        geom_boxplot() +
+  labs(title="Comparison of Unemployment Rates in Michigan Peninsulas",x="Peninsula",y="Unemployment Rate")
+
+ggplot(county_MI, aes(x = county_MI$peninsula, y = county_MI$MeanCommute)) +
+        geom_boxplot() +
+  labs(title="Comparison of Communte Teams in Michigan Peninsulas",x="Peninsula",y="Average Commute")
+
+ggplot(county_MI, aes(x = county_MI$peninsula, y = county_MI$WorkAtHome)) +
+        geom_boxplot() +
+  labs(title="Comparison of Percentage Who Work At Home in Michigan Peninsulas",x="Peninsula",y="Percentage of Workers Working from Home")
+
 ```
+
+Summary: Comparing some aspects of professional life and work between the Lower Penninsula (LP) and Upper Penninsula (UP).  The LP has a higher percentage of professional workers, as expected, since there are more urban areas in the LP.  Poverty is higher on average in LP, which I found surprising.  There are also more outliers in the LP, which would make sense since there there is such a different in affluent vs urban counties in the LP.  Surprisg as well the unemployment median is higher in the LP compared to the UP.  I thought the LP would have shorter commute times, but the commute is actually shorter in the UP.  This may mean that workers don't leave the major cities of the UP for their jobs.  I also expected the UP to have more work at home jobs, but those numbers are lower than the LP as well.  This may be due to infrastructure and lack of widespread internet when the census was taken.
 
 ### Problem 5 - How do regions of the country compare?
 
