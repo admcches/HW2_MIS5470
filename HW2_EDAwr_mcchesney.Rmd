@@ -245,6 +245,15 @@ labels.
 
 ```{r faceted_histo}
 
+#apply Sturge's rule
+  binsize = round(1 +3.22 * log(nrow(county_df)))
+
+#histogram
+  ggplot(county_df, aes(x = county_df$MeanCommute)) +
+    geom_histogram(bins = binsize) + 
+    labs(title= "Commute by Region", x="Average Commute Time", y="Number of Counties") +
+    facet_grid(. ~ county_df$Region)
+
 ```
 
 ### Problem 6 - Basic bar chart
@@ -253,6 +262,10 @@ Create a bar chart showing the number of counties by Region in the US. Make sure
 your graph has a title and good axis labels.
 
 ```{r bar_counties_by_region}
+
+ggplot(county_df, aes(x=county_df$Region)) +
+  geom_bar(stat = "count") +
+    labs(title= "Counties by Region", x="Region", y="Number of Counties")
 
 ```
 
@@ -263,6 +276,10 @@ Income and MeanCommute.
 
 ```{r xy_inc_commute}
 
+ggplot(county_MI, aes(x=Income, y=MeanCommute)) +
+  geom_point() +
+  labs(title= "Comparison of Commute and Income", x="Income", y="Mean Commute")
+
 ```
 
 Create a modified version of the above scatter plot in which the point color
@@ -270,9 +287,15 @@ is mapped to peninsula.
 
 ```{r xy_inc_commute_peninsula}
 
+ggplot(county_MI, aes(x=Income, y=MeanCommute, shape=peninsula, color=peninsula)) +
+  geom_point() +
+  labs(title= "Comparison of Commute and Income", x="Income", y="Mean Commute")
+
 ```
 
 Your thoughts on the relationship between these variables?
+
+Answer: Appears to be a positive correlation between income and commute time.  Want to make sure money?  Be prepared to drive farther to work.
 
 Now, create a few more scatter plots using variables of your choosing in which
 you facet by peninsula as well. How do the relationships compare across the
