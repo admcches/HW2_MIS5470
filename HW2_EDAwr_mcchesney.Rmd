@@ -303,14 +303,55 @@ peninsulas?
 
 ```{r xy_faceted_peninsula}
 
+ggplot(county_MI, aes(x=Income, y=MeanCommute)) +
+  geom_point() +
+  labs(title= "Comparison of Commute and Income", x="Income", y="Mean Commute") +
+  facet_grid(. ~ peninsula)
+
+ggplot(county_MI, aes(x=TotalPop, y=White)) +
+  geom_point() +
+  labs(title= "Comparison of Income and White Resident Percentage", x="Income", y="Percentage of White Residents") +
+  facet_grid(. ~ peninsula)
+
+ggplot(county_MI, aes(x=Poverty, y=Unemployment)) +
+  geom_point() +
+  labs(title= "Comparison of Poverty and Unemployment Percentages", x="Poverty Rate", y="Unemployment Rate") +
+  facet_grid(. ~ peninsula)
+
+ggplot(county_MI, aes(x=Office, y=Walk)) +
+  geom_point() +
+  labs(title= "Comparison of Office Jobs and Walking to Work", x="Percentage Who Work in Office", y="Percetnage Who Walk to Work") +
+  facet_grid(. ~ peninsula)
+
 ```
 
+Answer: Most interesting relationship to me is Poverty to Unemployment.  The relationship appears to be much more linear in the LP than the UP.  In fact, I'm going to add a fit line right now.
+
+```{r fit line for unemployment and poverty rate}
+
+ggplot(county_MI, aes(x=Poverty, y=Unemployment)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  labs(title= "Comparison of Poverty and Unemployment Percentages", x="Poverty Rate", y="Unemployment Rate") +
+  facet_grid(. ~ peninsula)
+
+```
+
+Surpringly the slop of the lines are almost the same.  The 95% confidence region though is much wider for the UP, given the smaller amount of data points.  
 
 Now use the full US data frame.
 
 Create a scatter plot of TotalPop by Income.
 
 ```{r xy_pop_inc}
+
+ggplot(county_df, aes(x=TotalPop, y=Income)) +
+  geom_point() +
+  labs(title= "Plot of Total Population and Income", x="Total Population", y="Income")
+
+ggplot(county_df, aes(x=log(TotalPop), y=Income)) +
+  geom_point() +
+  labs(title= "Plot of Total Population and Income (Log10 of Population)", x="Total Population", y="Income") 
 
 ```
 
@@ -319,6 +360,10 @@ for patterns. So, figure out a way to either change the axis scales or
 the plotted data itself to use a base 10 logarithmic scale (or transform).
 Write a short paragraph on why one might want to use a log scale or log
 transform of data when plotting.
+
+According to Naomi Robbins from Forbes (see credit below), two main reasons to use log scales are to respond to skewness toward large values and to show percent change.  In this case, a couple of those large incomes on the right of the first chart are compressing everything else below.  Using a log scale drastically shortens the physical distance of points on the charts, because we're using logs (which is just another name for exponents).  We can express a large gap of true value with a small physical gap in the chart by using exponents.
+
+Credit to http://datadrivenjournalism.net/resources/when_should_i_use_logarithmic_scales_in_my_charts_and_graphs for ideas on this issue.
 
 ### Hacker Extra - More analysis
 
